@@ -23,7 +23,7 @@ A PHP-based email monitoring system that connects to IMAP email servers (specifi
 
 1. Clone this repository:
    ```bash
-   git clone [repository-url]
+   git clone https://github.com/bobga/email-hooking.git
    cd email-hooking
    ```
 
