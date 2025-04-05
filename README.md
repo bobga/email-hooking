@@ -1,33 +1,79 @@
-# Email Reader
+# Email Hooking
 
-This PHP script allows you to connect to an IMAP email server (specifically Outlook in this example) and retrieve emails from the inbox. It utilizes the `Ddeboer\Imap` library for interacting with the IMAP server.
+A PHP-based email monitoring system that connects to IMAP email servers (specifically configured for Outlook) to automatically process new emails, extract their contents, and handle attachments.
+
+## Features
+
+- Connects to IMAP email servers (Outlook by default)
+- Retrieves unread emails from the current day
+- Extracts email subject and body content
+- Handles both regular and embedded message attachments
+- Automatically downloads attachments to a specified directory
+- Marks processed emails as 'seen' to prevent duplicate processing
+- Supports sorting emails by date in descending order
 
 ## Requirements
 
-- PHP version 5.3 or higher
-- Composer for installing dependencies
+- PHP 7.0 or higher
+- Composer for dependency management
+- IMAP PHP extension enabled
+- Write permissions for the attachment download directory
 
 ## Installation
 
-1. Clone this repository to your local machine.
-2. Run `composer install` to install the required dependencies.
-3. Replace `'your@outlook.com'` and `'password'` with your Outlook email address and password.
-4. Adjust any other settings or criteria according to your needs.
+1. Clone this repository:
+   ```bash
+   git clone [repository-url]
+   cd email-hooking
+   ```
+
+2. Install dependencies using Composer:
+   ```bash
+   composer install
+   ```
+
+3. Configure your email credentials:
+   - Open `index.php`
+   - Replace `'your@outlook.com'` with your email address
+   - Replace `'password'` with your email password
+   - Adjust the IMAP server settings if using a different email provider
 
 ## Usage
 
-1. Run the script (`email_reader.php`) from the command line or execute it via a web server with PHP support.
-2. The script will connect to the Outlook IMAP server and authenticate with the provided credentials.
-3. It retrieves emails from the inbox that were received on the current day.
-4. For each email, it prints the subject and body text to the console.
-5. If there are any attachments, it downloads them to the specified directory (`D:/` in this example).
-6. Finally, it marks each processed email as 'seen' to prevent re-processing.
+1. Run the script:
+   ```bash
+   php index.php
+   ```
+
+2. The script will:
+   - Connect to your email server
+   - Fetch unread emails from the current day
+   - Display email subjects and body content
+   - Process any attachments:
+     - Regular attachments are downloaded to the specified directory
+     - Embedded messages are displayed with their subject and content
+   - Mark processed emails as 'seen'
 
 ## Configuration
 
-- Adjust the IMAP server settings (`imap-mail.outlook.com`) if you're using a different email provider.
-- Modify the mailbox name (`Inbox`) if you want to read emails from a different folder.
-- Customize the download directory (`D:/`) for saving attachments as needed.
+You can customize the following settings in `index.php`:
+
+- IMAP Server: `imap-mail.outlook.com` (default for Outlook)
+- Mailbox: `Inbox` (default mailbox)
+- Attachment Directory: `D:/` (default download location)
+- Date Range: Currently set to fetch today's emails
+- Sort Order: Emails are sorted by date in descending order
+
+## Security Notes
+
+- Never commit your email credentials to version control
+- Consider using environment variables for sensitive information
+- Ensure proper file permissions for the attachment download directory
+- Use secure connection settings when available
+
+## Dependencies
+
+- [ddeboer/imap](https://github.com/ddeboer/imap) (^1.9) - PHP IMAP library
 
 ## License
 
